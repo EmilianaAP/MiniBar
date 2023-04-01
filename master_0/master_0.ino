@@ -162,5 +162,23 @@ void loop() {
 
   if(Serial.available()){
     mySerialTo.write(Serial.read());
+
+    //state = Serial.read()    
+
+    //Coctails:
+    /*
+    if(state == 'a'){
+      Serial.println("<First coctail name> is making");
+      char id_ = '3';
+      char quantity = '8';
+      generatePouringFromBottlePacket(id_, quantity); 
+      id_ = '2';
+      quantity = '3';
+      generatePouringFromBottlePacket(id_, quantity);       
+                  
+    }    
+
+    */
+
   }
 }
