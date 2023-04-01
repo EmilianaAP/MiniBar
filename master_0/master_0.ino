@@ -112,36 +112,15 @@ void setup(){
   Serial.begin(9600);
 
   Serial.println("\nThis arduino id: ");
-  Serial.println(id);
+  Serial.println(id);   
 
   char id_ = '3';
   char quantity = '8';
-  //generatePouringFromBottlePacket(id_, quantity);      
+  generatePouringFromBottlePacket(id_, quantity);   
 }
 
 void loop() {
-    /*if(mySerialTo.available()){
-      tmpRx = mySerialTo.read();
-      
-    if(nextFree == 0 && tmpRx == PACKET_HEADER) {
-      clearRxBuffer();
-    }
-
-    if(nextFree == 2) {
-      dataToReceive = tmpRx-'0';  // store how many bytes we have to receive - data len   
-    }
-
-    bufferRx[nextFree++] = tmpRx;  
-
-    //Serial.println("abababba ");
-
-    if(dataToReceive == (nextFree - 3)){    
-      // trqbva da go obrabotim i izpratim na sledvashtiq paketa 
-      //receivePacket();
-    }  
-  }*/
-
-  if(mySerialFrom.available()){
+    if(mySerialFrom.available()){
       tmpRx = mySerialFrom.read();
       
     if(nextFree == 0 && tmpRx == PACKET_HEADER) {
@@ -177,8 +156,9 @@ void loop() {
       generatePouringFromBottlePacket(id_, quantity);       
                   
     }    
-
     */
+
+
 
   }
 }

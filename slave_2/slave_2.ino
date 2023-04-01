@@ -1,7 +1,5 @@
 #include <SoftwareSerial.h>
 
-// #define DEBUG 1
-
 #define rxPinFrom 5
 #define txPinFrom 4
 #define rxPinTo 2
@@ -15,7 +13,6 @@ SoftwareSerial mySerialFrom = SoftwareSerial(rxPinFrom, txPinFrom);
 #define MAX_PACKET_SIZE 100
 #define PACKET_HEADER   0x23
 
-#define CMD_COUNT       0x43   // C
 #define CMD_EBP         0x41   // A
 #define CMD_PFB         0x42   // B
 
@@ -164,7 +161,6 @@ void loop() {
       receivePacket();
     }    
 
-    //Serial.write(bufferRx[nextFree-1]);
   }
 
   if(Serial.available()){

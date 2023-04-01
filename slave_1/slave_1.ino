@@ -1,7 +1,5 @@
 #include <SoftwareSerial.h>
 
-// #define DEBUG 1
-
 #define rxPinFrom 5
 #define txPinFrom 4
 #define rxPinTo 2
@@ -15,7 +13,6 @@ SoftwareSerial mySerialFrom = SoftwareSerial(rxPinFrom, txPinFrom);
 #define MAX_PACKET_SIZE 100
 #define PACKET_HEADER   0x23
 
-#define CMD_COUNT       0x43   // C
 #define CMD_EBP         0x41   // A
 #define CMD_PFB         0x42   // B
 
@@ -33,8 +30,6 @@ void clearTxBuffer() {
     bufferTx[i] = 0;
   }
   nextFree=0;
-  
-  //Serial.println("Tx buffer cleared");
 }
 
 void clearRxBuffer() {
@@ -42,8 +37,8 @@ void clearRxBuffer() {
     bufferRx[i] = 0;
   }
   nextFree=0;
-  //Serial.println("Rx buffer cleared");
 }
+
 // ================================================
 // == System flags and variables
 char id = '1';
@@ -80,17 +75,6 @@ void generatePacket(char cmd, char len, char *data) {
   for(int i = 0; i < nextFree; i++){
       mySerialTo.write(bufferTx[i]);
   }
-
-  //bufferTx[nextFree++] = '\n';
-
-  /*for(int i = 0; i < nextFree; i++){
-    Serial.print(i);
-     Serial.print(" : ");
-    Serial.print(bufferTx[i],HEX);
-     Serial.println("");
-      mySerialTo.write(bufferTx[i]);
-  }
-  Serial.println("");*/
 }
 
 int receivePacket(){
@@ -149,10 +133,6 @@ void setup(){
 
   //generateEmptyBottlePacket();
   //receivePacket();  
-  
-#ifdef DEBUG  
-  Serial.println("End init");
-#endif
 }
 
 void loop() {
@@ -172,8 +152,6 @@ void loop() {
     if(dataToReceive == (nextFree - 3)){
        receivePacket();
     }    
-
-    //Serial.write(bufferRx[nextFree-1]);
   }
 
   if(Serial.available()){
