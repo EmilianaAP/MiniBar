@@ -1,52 +1,32 @@
 import 'package:flutter/material.dart';
-import 'DrinksPage.dart';
 
-void main() {
-  runApp(MyApp());
-}
+class DrinksPage extends StatelessWidget {
+  const DrinksPage({Key? key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My App',
-      debugShowCheckedModeBanner: false,
-      home: Navigator( // Wrap MaterialApp with Navigator widget
-        onGenerateRoute: (RouteSettings settings) {
-          return MaterialPageRoute(
-            builder: (BuildContext context) => MyHomePage(),
-            settings: settings,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Drinks'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DrinksPage()),
-                );
+                // Action to be performed when the 'All drinks' button is pressed
               },
               child: Text(
-                'Drinks',
+                'All drinks',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
                 ),
               ),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.teal),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -58,17 +38,18 @@ class MyHomePage extends StatelessWidget {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Action to be performed when the 'Setup' button is pressed
+                // Action to be performed when the 'Available drinks' button is pressed
               },
               child: Text(
-                'Setup',
+                'Available drinks',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
                 ),
               ),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.teal),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
