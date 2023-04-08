@@ -10,9 +10,21 @@ class AllDrinksPage extends StatelessWidget {
         title: Text('All Drinks'),
         backgroundColor: Colors.teal,
       ),
-      body: const Center(
-        child: MyStatefulWidget(),
+
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: const MyStatefulWidget(),
       ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // handle button press
+        },
+        child: const Icon(Icons.add, size: 32),
+        backgroundColor: Colors.teal,
+        elevation: 6,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
@@ -29,23 +41,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   final List<String> _items = [
     'Lemonade',
-    'Water',
     'Mojito',
     'Martini',
     'Daiquiri',
     'Margarita',
-    'Manhattan',
-    'Negroni',
     'Gin and Tonic',
-    'Whiskey Sour',
     'Cosmopolitan',
-    'Paloma',
-    'Pina Colada',
     'Bloody Mary',
     'Tequila Sunrise',
     'Sex on the Beach',
-    'Long Island Iced Tea',
-    'Singapore Sling',
     'Zombie',
     'Blue Lagoon',
   ];
@@ -55,13 +59,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scrollbar(
       controller: _controllerOne,
       thumbVisibility: true,
-      child: GridView.builder(
-        controller: _controllerOne,
-        itemCount: 20,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 1,
-          childAspectRatio: 4,
-        ),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 80.0),
+        child: GridView.builder(
+          controller: _controllerOne,
+          itemCount: _items.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            childAspectRatio: 4,
+          ),
         itemBuilder: (BuildContext context, int index) {
           return Center(
             child: ElevatedButton(
@@ -88,6 +94,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           );
         },
       ),
+    ),
     );
   }
 }
