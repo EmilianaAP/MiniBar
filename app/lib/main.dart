@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'DrinksPage.dart';
+import 'AllDrinksPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,7 +43,7 @@ class MyHomePage extends StatelessWidget {
                 'Drinks',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18.0,
+                  fontSize: 22.0,
                 ),
               ),
               style: ButtonStyle(
@@ -52,10 +53,10 @@ class MyHomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                fixedSize: MaterialStateProperty.all<Size>(Size(200.0, 50.0)),
+                fixedSize: MaterialStateProperty.all<Size>(Size(300.0, 75.0)),
               ),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 18.0),
             ElevatedButton(
               onPressed: () {
                 // Action to be performed when the 'Setup' button is pressed
@@ -64,7 +65,7 @@ class MyHomePage extends StatelessWidget {
                 'Setup',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18.0,
+                  fontSize: 22.0,
                 ),
               ),
               style: ButtonStyle(
@@ -74,7 +75,7 @@ class MyHomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                fixedSize: MaterialStateProperty.all<Size>(Size(200.0, 50.0)),
+                fixedSize: MaterialStateProperty.all<Size>(Size(300.0, 75.0)),
               ),
             ),
           ],

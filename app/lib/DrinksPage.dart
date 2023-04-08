@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'AllDrinksPage.dart';
 
 class DrinksPage extends StatelessWidget {
   const DrinksPage({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class DrinksPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Drinks'),
+        backgroundColor: Colors.teal, 
       ),
       body: Center(
         child: Column(
@@ -15,13 +17,16 @@ class DrinksPage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                // Action to be performed when the 'All drinks' button is pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AllDrinksPage()),
+                );
               },
               child: Text(
                 'All drinks',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18.0,
+                  fontSize: 22.0,
                 ),
               ),
               style: ButtonStyle(
@@ -32,7 +37,7 @@ class DrinksPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                fixedSize: MaterialStateProperty.all<Size>(Size(200.0, 50.0)),
+                fixedSize: MaterialStateProperty.all<Size>(Size(300.0, 75.0)),
               ),
             ),
             SizedBox(height: 20.0),
@@ -44,7 +49,7 @@ class DrinksPage extends StatelessWidget {
                 'Available drinks',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18.0,
+                  fontSize: 22.0,
                 ),
               ),
               style: ButtonStyle(
@@ -55,7 +60,7 @@ class DrinksPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                fixedSize: MaterialStateProperty.all<Size>(Size(200.0, 50.0)),
+                fixedSize: MaterialStateProperty.all<Size>(Size(300.0, 75.0)),
               ),
             ),
           ],
