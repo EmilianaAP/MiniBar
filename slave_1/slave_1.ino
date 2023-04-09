@@ -24,6 +24,10 @@ char dataToReceive;
 
 char tmpRx;
 
+// ===============================================
+
+int pumpPin = 8;
+
 //=================================================
 void clearTxBuffer() {
   for(int i = 0 ; i < MAX_PACKET_SIZE; i ++) {
@@ -123,6 +127,7 @@ int receivePacket(){
 }
 
 void setup(){ 
+  pinMode(pumpPin, OUTPUT);
   clearTxBuffer();
   mySerialTo.begin(9600);
   mySerialFrom.begin(9600);
@@ -156,5 +161,5 @@ void loop() {
 
   if(Serial.available()){
     mySerialTo.write(Serial.read());
-  }
+  }  
 }
