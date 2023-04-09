@@ -114,7 +114,11 @@ void setup(){
   Serial.println("\nThis arduino id: ");
   Serial.println(id);   
 
+<<<<<<< HEAD
   char id_ = '4';
+=======
+  char id_ = '2';
+>>>>>>> 7d6aeed8df5eba4bf04d1646bc8a5277630f52e9
   char quantity = '8';
   generatePouringFromBottlePacket(id_, quantity);   
 }
