@@ -110,6 +110,12 @@ int receivePacket(){
         Serial.print("Pouring ");
         Serial.print(data_[1]);
         Serial.println("ml");
+        delay(5000);
+        Serial.println("Pump on");
+        digitalWrite(8,LOW);  
+        delay(500);
+        Serial.println("Pump off");
+        digitalWrite(8,HIGH);
         clearTxBuffer();         
         break;       
       }else{  
@@ -131,6 +137,10 @@ void setup(){
   mySerialTo.begin(9600);
   mySerialFrom.begin(9600);
   Serial.begin(9600);
+
+  pinMode(8, OUTPUT);
+  Serial.println("Pump off");
+  digitalWrite(8,HIGH);  
 
   Serial.println("This arduino id: ");
   Serial.println(id);
