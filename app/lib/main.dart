@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'DrinksPage.dart';
-import 'AllDrinksPage.dart';
-
+import 'SetupPage.dart';
 void main() {
   runApp(MyApp());
 }
@@ -59,7 +58,10 @@ class MyHomePage extends StatelessWidget {
             SizedBox(height: 18.0),
             ElevatedButton(
               onPressed: () {
-                // Action to be performed when the 'Setup' button is pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SetupPage()),
+                );
               },
               child: Text(
                 'Setup',

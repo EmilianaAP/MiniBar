@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'AllDrinksPage.dart';
-import 'AvailableDrinks.dart';
+import 'AvailableDrinksPage.dart';
 
 class DrinksPage extends StatelessWidget {
   const DrinksPage({Key? key}) : super(key: key);
