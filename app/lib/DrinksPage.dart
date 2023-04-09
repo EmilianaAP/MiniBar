@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'AllDrinksPage.dart';
+import 'AvailableDrinks.dart';
 
 class DrinksPage extends StatelessWidget {
   const DrinksPage({Key? key}) : super(key: key);
@@ -43,7 +44,10 @@ class DrinksPage extends StatelessWidget {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Action to be performed when the 'Available drinks' button is pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AvailableDrinksPage()),
+                );
               },
               child: Text(
                 'Available drinks',
