@@ -105,6 +105,13 @@ void receivePacket(){
   clearRxBuffer();
 }
 
+void lemonade_1_2(){
+  char id_ = '2';
+  char quantity = '8';
+  generatePouringFromBottlePacket(id_, quantity); 
+  generatePouringFromBottlePacket(id_, quantity);    
+}
+
 void setup(){ 
   clearTxBuffer();
   mySerialTo.begin(9600);
@@ -114,13 +121,7 @@ void setup(){
   Serial.println("\nThis arduino id: ");
   Serial.println(id);   
 
-<<<<<<< HEAD
-  char id_ = '4';
-=======
-  char id_ = '2';
->>>>>>> 7d6aeed8df5eba4bf04d1646bc8a5277630f52e9
-  char quantity = '8';
-  generatePouringFromBottlePacket(id_, quantity);   
+  lemonade_1_2();
 }
 
 void loop() {
