@@ -105,12 +105,46 @@ void receivePacket(){
   clearRxBuffer();
 }
 
-void lemonade_1_2(){
-  char id_ = '2';
+void dnink1(){
+  char id_ = '1';
   char quantity = '8';
-  generatePouringFromBottlePacket(id_, quantity); 
   generatePouringFromBottlePacket(id_, quantity);    
 }
+
+void dnink2(){
+  char id_ = '2';
+  char quantity = '8'; 
+  generatePouringFromBottlePacket(id_, quantity);    
+}
+
+void dnink3(){
+  char id_ = '3';
+  char quantity = '8';
+  generatePouringFromBottlePacket(id_, quantity);    
+}
+
+void dnink4(){
+  char id_ = '4';
+  char quantity = '8'; 
+  generatePouringFromBottlePacket(id_, quantity);    
+}
+
+void dnink1_2(){
+  char id_ = '1';
+  char quantity = '8';
+  char id__ = '2';
+  generatePouringFromBottlePacket(id_, quantity);
+  generatePouringFromBottlePacket(id__, quantity); 
+}
+
+void dnink1_3(){
+  char id_ = '1';
+  char quantity = '8';
+  char id__ = '3';
+  generatePouringFromBottlePacket(id_, quantity);
+  generatePouringFromBottlePacket(id__, quantity);    
+}
+
 
 void setup(){ 
   clearTxBuffer();
