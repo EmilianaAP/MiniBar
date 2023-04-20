@@ -16,12 +16,13 @@
           средата за разработка на Arduino (Arduino IDE)
           
 >Части:
-- Микроконтролер - Arduino Uno x 2
-- Микроконтролер - Arduino Nano x 3
+- Микроконтролер - Arduino Uno x 2 (master, slave)
+- Микроконтролер - Arduino Nano x 3 (slave)
 - Blueetooth модул - HC-06
 - Водна помпа х 4
 - Реле х 4
 - Дървена конструкция
 - Бутилки х 4
 - Маркуч х 8
-
+- Breadbord x 4
+- Външно захранване
