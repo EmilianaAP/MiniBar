@@ -155,7 +155,7 @@ void setup(){
   Serial.println("\nThis arduino id: ");
   Serial.println(id);   
 
-  lemonade_1_2();
+  //lemonade_1_2();
 }
 
 void loop() {
