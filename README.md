@@ -1,4 +1,4 @@
-# MiniBar
+# EP MiniMixer
 
 ![image](https://user-images.githubusercontent.com/72454123/233491577-a47f8b43-910f-4ea4-a70c-13fc6e82e5c4.png)
 
