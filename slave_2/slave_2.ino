@@ -1,4 +1,5 @@
 #include <SoftwareSerial.h>
+#include <avr/wdt.h>
 
 #define rxPinFrom 5
 #define txPinFrom 4
@@ -15,6 +16,8 @@ SoftwareSerial mySerialFrom = SoftwareSerial(rxPinFrom, txPinFrom);
 
 #define CMD_EBP         0x41   // A
 #define CMD_PFB         0x42   // B
+#define CMD_RS          0x44   // D
+
 
 // == All variables related to communication
 char bufferTx[MAX_PACKET_SIZE];
@@ -25,6 +28,11 @@ char dataToReceive;
 char tmpRx;
 
 //=================================================
+
+void reset() {
+  asm volatile ("  jmp 0");  // jump to the reset vector
+}
+
 void clearTxBuffer() {
   for(int i = 0 ; i < MAX_PACKET_SIZE; i ++) {
     bufferTx[i] = 0;
@@ -50,6 +58,10 @@ void generateEmptyBottlePacket() {
 
 void TransmitEmptyBottlePacket(char* id_data) {
   generatePacket(CMD_EBP, '1', id_data);
+}
+
+void restartSlave(char *slaveId) {
+  generatePacket(CMD_RS, '1', slaveId);
 }
 
 void TransmitPouringFromBottlePacket(char bottleId, char quantity) {
@@ -94,10 +106,12 @@ int receivePacket(){
   //Packet analysis
   if(packet_header_ != PACKET_HEADER){
     Serial.println("Bad header");
+    clearTxBuffer();
     return -1;
   }
 
   switch(cmd_){
+    wdt_disable();
     case CMD_EBP:
       Serial.print("Transmit ");
       Serial.print(data_[0]);
@@ -110,10 +124,10 @@ int receivePacket(){
         Serial.print("Pouring ");
         Serial.print(data_[1]);
         Serial.println("ml");
-        delay(5000);
+        delay(2000);
         Serial.println("Pump on");
         digitalWrite(8,LOW);  
-        delay(5000);
+        delay(3000);
         Serial.println("Pump off");
         digitalWrite(8,HIGH);
         clearTxBuffer();         
@@ -124,9 +138,21 @@ int receivePacket(){
         Serial.print("ml to slave ");
         Serial.println(data_[0]);       
         TransmitPouringFromBottlePacket(data_[0], data_[1]);   
-        clearTxBuffer();         
+        clearTxBuffer();
+        delay(2000);       
         break;
-      }        
+      }
+    case CMD_RS:
+      Serial.print("Reset id: ");
+      Serial.print(data_[0]);
+      Serial.print("\n"); 
+      if(data_[0] == id){                        
+        reset(); 
+      }else{
+        restartSlave(&data_[0]);         
+      } 
+      clearTxBuffer();     
+      break;        
   }  
   
   clearRxBuffer();
@@ -145,8 +171,10 @@ void setup(){
   Serial.println("This arduino id: ");
   Serial.println(id);
 
-  //generateEmptyBottlePacket();
-  //receivePacket();
+  wdt_disable();
+  delay(8000);
+  wdt_enable(WDTO_8S);
+
   
 #ifdef DEBUG  
   Serial.println("End init");

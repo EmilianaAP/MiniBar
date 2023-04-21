@@ -1,4 +1,5 @@
 #include <SoftwareSerial.h>
+#include <avr/wdt.h>
 
 #define rxPinFrom 5
 #define txPinFrom 4
@@ -31,6 +32,10 @@ char tmpRx;
 int pumpPin = 8;
 
 //=================================================
+
+void reset() {
+  asm volatile ("  jmp 0");  // jump to the reset vector
+}
 
 //void(* resetFunc) (void) = 0; //declare reset function @ address 0
 
@@ -106,10 +111,12 @@ int receivePacket(){
   //Packet analysis
   if(packet_header_ != PACKET_HEADER){
     Serial.println("Bad header");
+    clearTxBuffer();
     return -1;
   }
 
   switch(cmd_){
+    wdt_disable();
     case CMD_EBP:
       TransmitEmptyBottlePacket(&data_[0]); 
       clearTxBuffer();         
@@ -119,13 +126,13 @@ int receivePacket(){
         Serial.print("Pouring ");
         Serial.print(data_[1]);
         Serial.println("ml");
-        delay(5000);
+        delay(2000);
         Serial.println("Pump on");
         digitalWrite(8,LOW);  
-        delay(5000);
+        delay(3000);
         Serial.println("Pump off");
         digitalWrite(8,HIGH);
-        clearTxBuffer();         
+        clearTxBuffer();                
         break;     
       }else{
         Serial.print("Transmit ");
@@ -133,23 +140,21 @@ int receivePacket(){
         Serial.print("ml to slave ");
         Serial.println(data_[0]);        
         TransmitPouringFromBottlePacket(data_[0], data_[1]);   
-        clearTxBuffer();         
+        clearTxBuffer();                 
         break;
       }
-    /*case CMD_RS:
+    case CMD_RS:
       Serial.print("Reset id: ");
-      Serial.print(&data_[0]);
+      Serial.print(data_[0]);
       Serial.print("\n"); 
-      if(&data_[0] == id){
-        Serial.print("Reset id: ");
-        Serial.print(&data_[0]);
-        Serial.print("\n");                         
-        resetFunc(); 
+      if(data_[0] == id){                        
+        reset(); 
       }else{
         restartSlave(&data_[0]);
+        clearTxBuffer();         
       } 
       clearTxBuffer();     
-      break;*/
+      break;
   }  
   
   clearRxBuffer();
@@ -169,11 +174,12 @@ void setup(){
   Serial.println("This arduino id: ");
   Serial.println(id);
 
-  //generateEmptyBottlePacket();
-  //receivePacket();  
+  wdt_disable();
+  delay(9000);
+  wdt_enable(WDTO_8S);  
 }
 
-void loop() {
+void loop() {  
   if(mySerialFrom.available()){
     tmpRx = mySerialFrom.read();
 

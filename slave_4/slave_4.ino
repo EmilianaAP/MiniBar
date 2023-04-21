@@ -1,4 +1,5 @@
 #include <SoftwareSerial.h>
+#include <avr/wdt.h>
 
 #define rxPinFrom 5
 #define txPinFrom 4
@@ -101,6 +102,7 @@ int receivePacket(){
   }
 
   switch(cmd_){
+    wdt_disable();
     case CMD_EBP:
       TransmitEmptyBottlePacket(&data_[0]); 
       clearTxBuffer();         
@@ -145,6 +147,11 @@ void setup(){
 
   Serial.println("This arduino id: ");
   Serial.println(id);
+
+  wdt_disable();
+  delay(8000);
+  wdt_enable(WDTO_8S);
+
 
   //generateEmptyBottlePacket();
   //receivePacket();  

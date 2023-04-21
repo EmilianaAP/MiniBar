@@ -54,12 +54,9 @@ void generatePouringFromBottlePacket(char bottleId, char quantity) {
   generatePacket(CMD_PFB, '2', data);
 }
 
-/*void restartSlave(char *slaveId) {
-  Serial.print("Sla: ");
-  Serial.print(slaveId);
-  Serial.println();
+void restartSlave(char *slaveId) {
   generatePacket(CMD_RS, '1', slaveId);
-}*/
+}
 
 void generatePacket(char cmd, char len, char *data) {
   clearTxBuffer();
@@ -107,52 +104,34 @@ void receivePacket(){
       Serial.println(" ");            
       clearTxBuffer();         
       break;
-    
   }  
   
   clearRxBuffer();
 }
 
-void dnink1(){
+void drink1(){
   char id_ = '1';
   char quantity = '8';
   generatePouringFromBottlePacket(id_, quantity);    
 }
 
-void dnink2(){
+void drink2(){
   char id_ = '2';
-  char quantity = '8'; 
+  char quantity = '8';
+  generatePouringFromBottlePacket(id_, quantity);  
+}
+
+void drink3(){
+  char id_ = '3';
+  char quantity = '8';
   generatePouringFromBottlePacket(id_, quantity);    
 }
 
-void dnink3(){
-  char id_ = '3';
-  char quantity = '8';
-  generatePouringFromBottlePacket('3', quantity);    
-}
-
-void dnink4(){
+void drink4(){
   char id_ = '4';
   char quantity = '8'; 
   generatePouringFromBottlePacket(id_, quantity);    
 }
-
-void dnink1_2(){
-  char id_ = '1';
-  char quantity = '8';
-  char id__ = '2';
-  generatePouringFromBottlePacket(id_, quantity);
-  generatePouringFromBottlePacket(id__, quantity); 
-}
-
-void dnink2_3(){
-  char id_ = '2';
-  char quantity = '8';
-  char id__ = '3';
-  generatePouringFromBottlePacket(id_, quantity);
-  generatePouringFromBottlePacket(id__, quantity);    
-}
-
 
 void setup(){ 
   clearTxBuffer();
@@ -161,10 +140,18 @@ void setup(){
   Serial.begin(9600);
 
   Serial.println("\nThis arduino id: ");
-  Serial.println(id);   
+  Serial.println(id);
 
-  //lemonade_1_2();
-  dnink3();
+  char id_1 = '1';
+  char id_2 = '2';
+  char id_3 = '3';
+  char id_4 = '4';
+
+  drink2();
+  delay(9000);
+  drink1();
+  delay(9000);
+  //drink4();  
 }
 
 void loop() {
