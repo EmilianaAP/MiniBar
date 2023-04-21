@@ -113,7 +113,7 @@ int receivePacket(){
         delay(5000);
         Serial.println("Pump on");
         digitalWrite(8,LOW);  
-        delay(7000);
+        delay(5000);
         Serial.println("Pump off");
         digitalWrite(8,HIGH);
         clearTxBuffer();         

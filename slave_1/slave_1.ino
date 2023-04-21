@@ -15,6 +15,8 @@ SoftwareSerial mySerialFrom = SoftwareSerial(rxPinFrom, txPinFrom);
 
 #define CMD_EBP         0x41   // A
 #define CMD_PFB         0x42   // B
+#define CMD_RS          0x44   // D
+
 
 // == All variables related to communication
 char bufferTx[MAX_PACKET_SIZE];
@@ -29,6 +31,9 @@ char tmpRx;
 int pumpPin = 8;
 
 //=================================================
+
+//void(* resetFunc) (void) = 0; //declare reset function @ address 0
+
 void clearTxBuffer() {
   for(int i = 0 ; i < MAX_PACKET_SIZE; i ++) {
     bufferTx[i] = 0;
@@ -54,6 +59,10 @@ void generateEmptyBottlePacket() {
 
 void TransmitEmptyBottlePacket(char* id_data) {
   generatePacket(CMD_EBP, '1', id_data);
+}
+
+void restartSlave(char *slaveId) {
+  generatePacket(CMD_RS, '1', slaveId);
 }
 
 void TransmitPouringFromBottlePacket(char bottleId, char quantity) {
@@ -113,7 +122,7 @@ int receivePacket(){
         delay(5000);
         Serial.println("Pump on");
         digitalWrite(8,LOW);  
-        delay(8000);
+        delay(5000);
         Serial.println("Pump off");
         digitalWrite(8,HIGH);
         clearTxBuffer();         
@@ -127,6 +136,20 @@ int receivePacket(){
         clearTxBuffer();         
         break;
       }
+    /*case CMD_RS:
+      Serial.print("Reset id: ");
+      Serial.print(&data_[0]);
+      Serial.print("\n"); 
+      if(&data_[0] == id){
+        Serial.print("Reset id: ");
+        Serial.print(&data_[0]);
+        Serial.print("\n");                         
+        resetFunc(); 
+      }else{
+        restartSlave(&data_[0]);
+      } 
+      clearTxBuffer();     
+      break;*/
   }  
   
   clearRxBuffer();

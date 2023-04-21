@@ -4,9 +4,10 @@
 #define MAX_PACKET_SIZE 100
 #define PACKET_HEADER   0x23
 
-#define CMD_COUNT       0x43   // C
 #define CMD_EBP         0x41   // A
 #define CMD_PFB         0x42   // B
+#define CMD_COUNT       0x43   // C
+#define CMD_RS          0x44   //D
 
 // == All variables related to communication
 char bufferTx[MAX_PACKET_SIZE];
@@ -52,6 +53,13 @@ void generatePouringFromBottlePacket(char bottleId, char quantity) {
 
   generatePacket(CMD_PFB, '2', data);
 }
+
+/*void restartSlave(char *slaveId) {
+  Serial.print("Sla: ");
+  Serial.print(slaveId);
+  Serial.println();
+  generatePacket(CMD_RS, '1', slaveId);
+}*/
 
 void generatePacket(char cmd, char len, char *data) {
   clearTxBuffer();
@@ -120,7 +128,7 @@ void dnink2(){
 void dnink3(){
   char id_ = '3';
   char quantity = '8';
-  generatePouringFromBottlePacket(id_, quantity);    
+  generatePouringFromBottlePacket('3', quantity);    
 }
 
 void dnink4(){
@@ -137,8 +145,8 @@ void dnink1_2(){
   generatePouringFromBottlePacket(id__, quantity); 
 }
 
-void dnink1_3(){
-  char id_ = '1';
+void dnink2_3(){
+  char id_ = '2';
   char quantity = '8';
   char id__ = '3';
   generatePouringFromBottlePacket(id_, quantity);
@@ -156,6 +164,7 @@ void setup(){
   Serial.println(id);   
 
   //lemonade_1_2();
+  dnink3();
 }
 
 void loop() {

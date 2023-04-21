@@ -139,6 +139,10 @@ void setup(){
   mySerialFrom.begin(9600);
   Serial.begin(9600);
 
+  pinMode(8, OUTPUT);
+  Serial.println("Pump off");
+  digitalWrite(8,HIGH); 
+
   Serial.println("This arduino id: ");
   Serial.println(id);
 
