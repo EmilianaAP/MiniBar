@@ -1,157 +1,74 @@
 import 'package:flutter/material.dart';
+import 'SetupBluetoothPage.dart';
+import 'SetupDrinksPage.dart';
 
-class SetupPage extends StatefulWidget {
+class SetupPage extends StatelessWidget {
   const SetupPage({Key? key}) : super(key: key);
-
-  @override
-  _MyDropdownMenuState createState() => _MyDropdownMenuState();
-}
-
-class _MyDropdownMenuState extends State<SetupPage> {
-  String _selectedItem1 = 'Empty';
-  String _selectedItem2 = 'Empty';
-  String _selectedItem3 = 'Empty';
-  String _selectedItem4 = 'Empty';
-  List<String> _dropdownItems = ['Empty', 'Water', 'Lemonade concentrate'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Dropdown Menu'),
-        backgroundColor: Colors.teal,
+        title: Text('Setup'),
+        backgroundColor: Colors.teal, 
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: DropdownButton<String>(
-              value: _selectedItem1,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedItem1 = newValue!;
-                });
-              },
-              items: _dropdownItems.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SetupBluetoothPage()),
                 );
-              }).toList(),
-              dropdownColor: Colors.white,
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
+              },
+              child: Text(
+                'BLAH',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
               ),
-              elevation: 16,
-              iconSize: 40,
-              icon: Icon(Icons.arrow_downward),
-              iconEnabledColor: Colors.black,
-              isExpanded: true,
-              underline: Container(
-                height: 2,
-                color: Colors.black,
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.teal),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                fixedSize: MaterialStateProperty.all<Size>(Size(300.0, 75.0)),
               ),
             ),
-          ),
-          SizedBox(height: 16),
-
-          Center(
-            child: DropdownButton<String>(
-              value: _selectedItem2,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedItem2 = newValue!;
-                });
-              },
-              items: _dropdownItems.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
+            SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SetupDrinksPage()),
                 );
-              }).toList(),
-              dropdownColor: Colors.white,
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
+              },
+              child: Text(
+                'Setup Drinks',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
               ),
-              elevation: 16,
-              iconSize: 40,
-              icon: Icon(Icons.arrow_downward),
-              iconEnabledColor: Colors.black,
-              isExpanded: true,
-              underline: Container(
-                height: 2,
-                color: Colors.black,
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.teal),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                fixedSize: MaterialStateProperty.all<Size>(Size(300.0, 75.0)),
               ),
             ),
-          ),
-          SizedBox(height: 16),
-
-          Center(
-            child: DropdownButton<String>(
-              value: _selectedItem3,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedItem3 = newValue!;
-                });
-              },
-              items: _dropdownItems.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              dropdownColor: Colors.white,
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
-              ),
-              elevation: 16,
-              iconSize: 40,
-              icon: Icon(Icons.arrow_downward),
-              iconEnabledColor: Colors.black,
-              isExpanded: true,
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          SizedBox(height: 16),
-
-          Center(
-            child: DropdownButton<String>(
-              value: _selectedItem4,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedItem4 = newValue!;
-                });
-              },
-              items: _dropdownItems.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              dropdownColor: Colors.white,
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
-              ),
-              elevation: 16,
-              iconSize: 40,
-              icon: Icon(Icons.arrow_downward),
-              iconEnabledColor: Colors.black,
-              isExpanded: true,
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          SizedBox(height: 16),
-        ],
+          ],
+        ),
       ),
     );
   }
