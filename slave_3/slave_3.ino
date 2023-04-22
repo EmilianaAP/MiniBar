@@ -115,10 +115,10 @@ int receivePacket(){
         Serial.print("Pouring ");
         Serial.print(data_[1]);
         Serial.println("ml");
-        delay(5000);
+        delay(2000);
         Serial.println("Pump on");
         digitalWrite(8,LOW);  
-        delay(5000);
+        delay(3000);
         Serial.println("Pump off");
         digitalWrite(8,HIGH);
         clearTxBuffer();         

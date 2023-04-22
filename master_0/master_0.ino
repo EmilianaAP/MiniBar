@@ -1,4 +1,5 @@
 #include <SoftwareSerial.h>
+#include <avr/wdt.h>
 
 //================================================
 #define MAX_PACKET_SIZE 100
@@ -18,6 +19,10 @@ char dataToReceive;
 char tmpRx;
 
 //=================================================
+void reset() {
+  asm volatile ("  jmp 0");  // jump to the reset vector
+}
+
 void clearTxBuffer() {
   for(int i = 0 ; i < MAX_PACKET_SIZE; i ++) {
     bufferTx[i] = 0;
@@ -45,6 +50,10 @@ int id = 0;
 // Set up a new SoftwareSerial object
 SoftwareSerial mySerialTo =  SoftwareSerial(rxPinTo, txPinTo);
 SoftwareSerial mySerialFrom = SoftwareSerial(rxPinFrom, txPinFrom);
+
+// ==================================================
+// BLT
+SoftwareSerial BT(10,11); // TX to pin_10. RX to pin_11 of Arduino.
 
 void generatePouringFromBottlePacket(char bottleId, char quantity) {
   char data[2];
@@ -112,7 +121,9 @@ void receivePacket(){
 void drink1(){
   char id_ = '1';
   char quantity = '8';
-  generatePouringFromBottlePacket(id_, quantity);    
+  generatePouringFromBottlePacket(id_, quantity);
+  delay(5500);
+  reset();
 }
 
 void drink2(){
@@ -138,20 +149,14 @@ void setup(){
   mySerialTo.begin(9600);
   mySerialFrom.begin(9600);
   Serial.begin(9600);
+  BT.begin(9600);
 
   Serial.println("\nThis arduino id: ");
   Serial.println(id);
 
-  char id_1 = '1';
-  char id_2 = '2';
-  char id_3 = '3';
-  char id_4 = '4';
-
-  drink2();
+  wdt_disable();
   delay(9000);
-  drink1();
-  delay(9000);
-  //drink4();  
+  wdt_enable(WDTO_8S);
 }
 
 void loop() {
@@ -177,23 +182,35 @@ void loop() {
   if(Serial.available()){
     mySerialTo.write(Serial.read());
 
-    //state = Serial.read()    
-
-    //Coctails:
-    /*
-    if(state == 'a'){
-      Serial.println("<First coctail name> is making");
-      char id_ = '3';
-      char quantity = '8';
-      generatePouringFromBottlePacket(id_, quantity); 
-      id_ = '2';
-      quantity = '3';
-      generatePouringFromBottlePacket(id_, quantity);       
-                  
-    }    
-    */
-
-
-
+    String command = Serial.readStringUntil('\n');
+    Serial.println(command); 
+    BT.print(command);  
   }
+
+  if (BT.available()){
+    String receive = BT.readStringUntil('\n');
+    Serial.println(receive);
+    
+    if(receive.toInt() == 1){
+      drink1();
+      reset();      
+    }
+
+    if(receive.toInt() == 2){
+      drink2();
+      reset();      
+    }
+
+    if(receive.toInt() == 3){
+      drink3();
+      reset();      
+    }
+
+    if(receive.toInt() == 4){
+      drink4();
+      reset();      
+    }
+
+    reset();  
+  }  
 }
