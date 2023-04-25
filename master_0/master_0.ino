@@ -207,6 +207,7 @@ void loop() {
     }
 
     if(receive.toInt() == 4){
+      wdt_disable();
       drink4();
       reset();      
     }
