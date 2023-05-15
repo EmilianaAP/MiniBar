@@ -24,7 +24,7 @@ class SetupPage extends StatelessWidget {
                 );
               },
               child: Text(
-                'BLAH',
+                'Setup Bluetooth',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 22.0,

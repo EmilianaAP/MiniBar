@@ -63,7 +63,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           return Center(
             child: ElevatedButton(
               onPressed: () {
-                //
+                
               },
               child: Text(
                 _items[index],
@@ -88,4 +88,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
     );
   }
+}
+
+class Communication {
+  connectBl(String address) {}
+  
+  void sendMessage(String s) {}
 }
